@@ -30,7 +30,7 @@ namespace RezaHub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("groups");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("RezaHub.Models.User", b =>
@@ -53,7 +53,7 @@ namespace RezaHub.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("users");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("RezaHub.Models.User", b =>

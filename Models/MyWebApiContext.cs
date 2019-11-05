@@ -10,7 +10,7 @@ namespace RezaHub.Models
     {
         public MyWebApiContext(DbContextOptions<MyWebApiContext> options) : base(options) { }
 
-        public DbSet<Group> groups { get; set; }
-        public DbSet<User> users { get; set; }
+        public  DbSet<Group> Groups { get; set; }
+        public  DbSet<User> Users { get; set; }
     }
 }

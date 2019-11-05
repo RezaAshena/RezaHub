@@ -9,8 +9,8 @@ using RezaHub.Models;
 namespace RezaHub.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20191105102329_initial")]
-    partial class initial
+    [Migration("20191105170657_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace RezaHub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("groups");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("RezaHub.Models.User", b =>
@@ -55,7 +55,7 @@ namespace RezaHub.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("users");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("RezaHub.Models.User", b =>
