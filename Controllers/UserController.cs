@@ -29,18 +29,39 @@ namespace RezaHub.Controllers
         public ActionResult Insert()
         {
             var groupType = _context.Groups.ToList();
-            var viewModel = new UserVM { Groups = groupType };
+            var viewModel = new UserFormViewModel { Groups = groupType };
 
-            return View(viewModel);
+            return View("UserForm",viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(User user)
+        public ActionResult Save(User user)
         {
-            _context.Users.Add(user);
+            if (user.Id == 0)
+                _context.Users.Add(user);
+            else
+            {
+              var userInDb = _context.Users.Single(u => u.Id == user.Id);
+                userInDb.Name = user.Name;
+                userInDb.Email = user.Email;
+                userInDb.GroupId = user.GroupId;
+            }
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Users");
+            return RedirectToAction("Index", "User");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            if (user == null)
+                return null;
+            var viewModel = new UserFormViewModel
+            {
+                User = user,
+                Groups = _context.Groups.ToList()
+            };
+            return View("UserForm",viewModel);
         }
 
     }

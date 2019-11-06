@@ -1,11 +1,11 @@
-﻿@model RezaHub.ViewModels.UserVM
+﻿@model RezaHub.ViewModels.UserFormViewModel
 @{
     ViewData["Title"] = "Insert";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>New User</h1>
-@using (@Html.BeginForm("Create", "Users"))
+@using (@Html.BeginForm("Save", "User"))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.User.Name)
@@ -20,6 +20,7 @@
         @Html.DropDownListFor(m => m.User.GroupId,new SelectList(Model.Groups,"Id","Name"), "Select Group Type",new { @class = "form-control" })
     </div>
 
+    @Html.HiddenFor(m=>m.User.Id)
     <button type="submit" class="btn btn-primary">Save</button> 
 }
 
