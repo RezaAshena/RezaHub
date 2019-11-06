@@ -7,6 +7,12 @@
 
 <h1>Users</h1>
 
+@if ( Model == null )
+{
+<p>We dont have any User yet.</p>
+}
+else
+{
 <table class="table table-bordered table-hover">
     <thead>
         <tr>Users</tr>
@@ -14,11 +20,14 @@
     <tbody>
         @foreach (var user in Model.Users)
         {
-            <tr>
-                <td>@Html.ActionLink(user.Name, "detail", "Users", new { id = user.Id }, null) </td>
-            </tr>
+        <tr>
+            <td>@Html.ActionLink(user.Name, "detail", "Users", new { id = user.Id }, null) </td>
+        </tr>
         }
     </tbody>
 
 </table>
+
+}
+
 

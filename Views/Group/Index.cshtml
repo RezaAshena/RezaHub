@@ -4,18 +4,27 @@
     ViewData["Title"] = "Groups";
 }
 
+@if ( Model == null )
+{
+<p>We dont have any Group yet.</p>
+}
+
+else
+{
+
     <table class="table table-bordered table-hover">
         <thead>
             <tr>Groups</tr>
         </thead>
         <tbody>
             @foreach (var group in Model.Groups)
-            {
-                <tr>
-                    <td>@Html.ActionLink(group.Name, "detail", "Movies", new { id = group.Id }, null) </td>
-                </tr>
-            }
+                {
+            <tr>
+                <td>@Html.ActionLink(group.Name, "detail", "Movies", new { id = group.Id }, null) </td>
+            </tr>
+                }
         </tbody>
 
     </table>
+}
 
