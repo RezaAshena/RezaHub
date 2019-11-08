@@ -23,15 +23,20 @@ namespace RezaHub.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var users = _context.Users.ToList();
+            var viewModel = new UserFormViewModel { Users = users };
+            return View(viewModel);
         }
-        
-        public ActionResult Insert()
+
+        public ActionResult Insert(User user)
         {
             var groupType = _context.Groups.ToList();
-            var viewModel = new UserFormViewModel { Groups = groupType };
+            var viewModel = new UserFormViewModel(user)
+            {
+                Groups = groupType
+            };
 
-            return View("UserForm",viewModel);
+            return View("UserForm", viewModel);
         }
 
         [HttpPost]
@@ -40,9 +45,8 @@ namespace RezaHub.Controllers
         {
             if(!ModelState.IsValid)
             {
-                var viewModel = new UserFormViewModel
+                var viewModel = new UserFormViewModel(user)
                 {
-                    User = user,
                     Groups=_context.Groups.ToList()
                 };
                 return View("UserForm", viewModel);
@@ -66,9 +70,9 @@ namespace RezaHub.Controllers
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
             if (user == null)
                 return null;
-            var viewModel = new UserFormViewModel
+            var viewModel = new UserFormViewModel(user)
             {
-                User = user,
+               
                 Groups = _context.Groups.ToList()
             };
             return View("UserForm",viewModel);

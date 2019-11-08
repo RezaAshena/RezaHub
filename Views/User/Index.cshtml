@@ -1,8 +1,7 @@
-﻿@model RezaHub.ViewModels.UserVM2
+﻿@model RezaHub.ViewModels.UserFormViewModel
 
 @{
     ViewData["Title"] = "List User";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Users</h1>
@@ -13,20 +12,20 @@
 }
 else
 {
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>Users</tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-        <tr>
-            <td>@Html.ActionLink(user.Name, "Edit", "User", new { id = user.Id }, null) </td>
-        </tr>
-        }
-    </tbody>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>Users</tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model.Users)
+            {
+            <tr>
+                <td>@Html.ActionLink(user.Name, "Edit", "User", new { id = user.Id }, null) </td>
+            </tr>
+            }
+        </tbody>
 
-</table>
+    </table>
 
 }
 
