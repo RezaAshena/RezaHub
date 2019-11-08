@@ -37,6 +37,15 @@ namespace RezaHub.Controllers
         [HttpPost]
         public ActionResult Save(User user)
         {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new UserFormViewModel
+                {
+                    User = user,
+                    Groups=_context.Groups.ToList()
+                };
+                return View("UserForm", viewModel);
+            }
             if (user.Id == 0)
                 _context.Users.Add(user);
             else
