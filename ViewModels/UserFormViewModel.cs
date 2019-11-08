@@ -24,9 +24,8 @@ namespace RezaHub.ViewModels
         {
             get
             {
-                if (Id != 0)
-                    return "Edit User";
-                return "New User";
+
+                return Id != 0 ? "Edit User" : "New User";
             }
         }
 

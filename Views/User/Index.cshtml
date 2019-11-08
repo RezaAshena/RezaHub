@@ -14,13 +14,20 @@ else
 {
     <table class="table table-bordered table-hover">
         <thead>
-            <tr>Users</tr>
+            <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Group</th>
+            </tr>
+            
         </thead>
         <tbody>
             @foreach(var user in Model.Users)
             {
             <tr>
                 <td>@Html.ActionLink(user.Name, "Edit", "User", new { id = user.Id }, null) </td>
+                <td>@user.Email</td>
+                <td>@user.GroupId</td>
             </tr>
             }
         </tbody>
