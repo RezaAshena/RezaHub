@@ -23,7 +23,7 @@ namespace RezaHub.Controllers
 
         public IActionResult Index()
         {
-            var users = _context.Users.ToList();
+            var users = _context.Users.OrderBy(u => u.Id).ToList();
             var viewModel = new UserFormViewModel { Users = users };
             return View(viewModel);
         }
