@@ -29,8 +29,11 @@ namespace RezaHub
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>(opt =>
-            opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiContext")));
+            //services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>(opt =>
+            //opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiContext")));
+
+            var connection = Configuration.GetConnectionString("MyWebApiContext");
+            services.AddDbContext<MyWebApiContext>(options => options.UseNpgsql(connection));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
