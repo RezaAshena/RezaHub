@@ -24,7 +24,7 @@ namespace RezaHub.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.OrderBy(u=>u.Id).ToListAsync();
         }
 
         // GET: api/Users/5
@@ -79,6 +79,10 @@ namespace RezaHub.Controllers.Api
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -89,6 +93,10 @@ namespace RezaHub.Controllers.Api
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
