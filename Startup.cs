@@ -36,7 +36,14 @@ namespace RezaHub
             var connection = Configuration.GetConnectionString("MyWebApiContext");
             services.AddDbContext<MyWebApiContext>(options => options.UseNpgsql(connection));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MyWebApiContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options=> 
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<MyWebApiContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
