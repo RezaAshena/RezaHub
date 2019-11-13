@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,8 @@ namespace RezaHub
 
             var connection = Configuration.GetConnectionString("MyWebApiContext");
             services.AddDbContext<MyWebApiContext>(options => options.UseNpgsql(connection));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MyWebApiContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,6 +57,8 @@ namespace RezaHub
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
