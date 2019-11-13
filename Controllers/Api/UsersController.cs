@@ -24,7 +24,7 @@ namespace RezaHub.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.OrderBy(u=>u.Id).ToListAsync();
+            return await _context.Users.Include(u=>u.GroupId).OrderBy(u=>u.Id).ToListAsync();
         }
 
         // GET: api/Users/5

@@ -43,7 +43,7 @@ else
 {
     <script>
         $(document).ready(function () {
-            $("#users").DataTable();
+          var table =  $("#users").DataTable();
 
             $("#users").on("click",".js-delete", function () {
                 var button = $(this);
@@ -53,8 +53,8 @@ else
                         $.ajax({
                         url: "/api/users/" + button.attr("data-user-id"),
                         method: "DELETE",
-                        success: function () {
-                            button.parents("tr").remove();
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
                         }
                     });
 
