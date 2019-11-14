@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RezaHub.Models;
 using RezaHub.ViewModels;
@@ -28,6 +29,7 @@ namespace RezaHub.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public ActionResult Insert(User user)
         {
             var groupType = _context.Groups.ToList();
@@ -41,6 +43,7 @@ namespace RezaHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Save(User user)
         {
             if(!ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace RezaHub.Controllers
             return RedirectToAction("Index", "User");
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
